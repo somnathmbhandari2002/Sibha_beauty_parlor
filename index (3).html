@@ -1,0 +1,1769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIBHA Foundation | Safe Workplaces. Safe Communities. Empowered Lives.</title>
+    <meta name="description" content="SIBHA Foundation supports organizations with POSH training, compliance, IC support, DEI initiatives, and POCSO awareness programs.">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #2d5f4f;
+            --primary-dark: #17372e;
+            --accent: #d4a574;
+            --accent-soft: #f3e4d2;
+            --ink: #181818;
+            --muted: #676767;
+            --surface-soft: #f8f5f0;
+            --line: rgba(45, 95, 79, 0.12);
+            --shadow-sm: 0 8px 24px rgba(20, 31, 27, 0.08);
+            --shadow-md: 0 18px 48px rgba(20, 31, 27, 0.12);
+            --shadow-lg: 0 24px 70px rgba(20, 31, 27, 0.18);
+            --radius: 22px;
+        }
+
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            font-family: 'Sora', sans-serif;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at top left, rgba(212, 165, 116, 0.18), transparent 24%),
+                linear-gradient(180deg, #fbf9f5 0%, #ffffff 22%, #faf7f2 100%);
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(45, 95, 79, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(45, 95, 79, 0.03) 1px, transparent 1px);
+            background-size: 64px 64px;
+            z-index: -1;
+        }
+
+        a, button, input, select, textarea { font: inherit; }
+        section { scroll-margin-top: 96px; }
+        :focus-visible { outline: 3px solid rgba(212, 165, 116, 0.45); outline-offset: 3px; }
+
+        .container-xl { max-width: 1200px; padding-inline: 20px; }
+
+        .section-subtitle {
+            margin-bottom: 1rem;
+            color: var(--accent);
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.22em;
+        }
+
+        .section-title {
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.03em;
+        }
+
+        .section-lead {
+            max-width: 760px;
+            margin-bottom: 3rem;
+            color: var(--muted);
+            font-size: 1.04rem;
+            line-height: 1.8;
+        }
+
+        .navbar {
+            padding: 1rem 0;
+            background: rgba(255, 255, 255, 0.9);
+            border-bottom: 1px solid rgba(45, 95, 79, 0.08);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 2px 10px rgba(20, 31, 27, 0.05);
+        }
+
+        .navbar-brand {
+            color: var(--primary) !important;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+
+        .navbar-brand i { color: var(--accent); }
+
+        .nav-link {
+            position: relative;
+            margin: 0 0.45rem;
+            padding: 0.5rem 0.2rem !important;
+            color: var(--ink) !important;
+            font-weight: 600;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.28s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after { width: 100%; }
+
+        .navbar-toggler {
+            border: 1px solid rgba(45, 95, 79, 0.14);
+            border-radius: 12px;
+            padding: 0.45rem 0.7rem;
+            box-shadow: none !important;
+        }
+
+        .btn-nav-primary,
+        .btn-primary-custom,
+        .btn-secondary-custom,
+        .btn-submit {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 54px;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 0.28s ease, box-shadow 0.28s ease, background-color 0.28s ease, color 0.28s ease, border-color 0.28s ease;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .btn-nav-primary {
+            padding: 0.72rem 1.4rem;
+            border: 0;
+            background: var(--primary);
+            color: #fff !important;
+        }
+
+        .btn-nav-primary:hover,
+        .btn-primary-custom:hover,
+        .btn-secondary-custom:hover,
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary-custom {
+            padding: 1rem 2rem;
+            border: 0;
+            background: var(--accent);
+            color: var(--primary-dark);
+        }
+
+        .btn-primary-custom:hover { background: #f2d3af; }
+
+        .btn-secondary-custom {
+            padding: 1rem 2rem;
+            background: transparent;
+            color: #fff;
+            border: 1.5px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .btn-secondary-custom:hover {
+            background: #fff;
+            color: var(--primary);
+            border-color: #fff;
+        }
+
+        .hero {
+            position: relative;
+            padding: 110px 0 120px;
+            color: #fff;
+            background:
+                radial-gradient(circle at top right, rgba(212, 165, 116, 0.2), transparent 20%),
+                linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            overflow: hidden;
+        }
+
+        .hero::before,
+        .cta-section::before,
+        footer::before {
+            content: '';
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212, 165, 116, 0.22), transparent 65%);
+            pointer-events: none;
+        }
+
+        .hero::before { right: -120px; top: -110px; }
+        .cta-section::before { left: -110px; bottom: -170px; }
+        footer::before { right: -120px; bottom: -180px; }
+
+        .hero-content, .hero-panel, .cta-inner { position: relative; z-index: 1; }
+
+        .eyebrow-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.65rem;
+            padding: 0.58rem 1rem;
+            margin-bottom: 1.3rem;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.09);
+            color: #f2dcc4;
+            font-size: 0.88rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            backdrop-filter: blur(8px);
+        }
+
+        .hero h1 {
+            margin-bottom: 1.4rem;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 6vw, 4.7rem);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -0.04em;
+        }
+
+        .hero-tagline {
+            margin-bottom: 1.4rem;
+            color: #edd2b0;
+            font-size: 1.18rem;
+            font-weight: 600;
+        }
+
+        .hero-description {
+            max-width: 640px;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.05rem;
+            line-height: 1.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-trust {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .hero-trust span {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.72rem 0.95rem;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.92);
+            font-size: 0.92rem;
+        }
+
+        .hero-panel {
+            max-width: 400px;
+            margin-left: auto;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 28px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 18px 54px rgba(7, 18, 14, 0.25);
+        }
+
+        .hero-panel-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            padding: 0.45rem 0.85rem;
+            border-radius: 999px;
+            background: var(--accent-soft);
+            color: var(--primary);
+            font-size: 0.84rem;
+            font-weight: 700;
+        }
+
+        .hero-panel h3 {
+            margin-bottom: 0.9rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+        }
+
+        .hero-panel p {
+            margin-bottom: 1.25rem;
+            color: rgba(255, 255, 255, 0.84);
+            line-height: 1.8;
+        }
+
+        .hero-panel-list { margin: 0; padding: 0; list-style: none; }
+
+        .hero-panel-list li {
+            display: flex;
+            gap: 0.85rem;
+            padding: 0.95rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            color: rgba(255, 255, 255, 0.92);
+        }
+
+        .hero-panel-list li:first-child { padding-top: 0; border-top: 0; }
+        .hero-panel-list i { margin-top: 0.18rem; color: #f2dcc4; }
+
+        .stats-section {
+            position: relative;
+            z-index: 3;
+            margin-top: 0;
+            padding: 40px 0 90px;
+        }
+
+        .stat-card {
+            padding: 2rem;
+            height: 100%;
+            text-align: center;
+            border: 1px solid rgba(45, 95, 79, 0.08);
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.92);
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.28s ease, box-shadow 0.28s ease;
+        }
+
+        .stats-shell {
+            padding-inline: 6px;
+            margin-top: -10px;
+        }
+
+        .stat-card:hover,
+        .service-card:hover,
+        .feature-item:hover,
+        .client-logo:hover,
+        .contact-info-item:hover,
+        .mission-card:hover,
+        .vision-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat-number {
+            margin-bottom: 0.45rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .stat-label { color: var(--muted); font-weight: 600; }
+
+        .about-section,
+        .services-section,
+        .why-section,
+        .clients-section,
+        .contact-section { padding: 100px 0; }
+
+        .about-highlight {
+            margin: 2rem 0;
+            padding: 1.5rem 1.75rem;
+            border-left: 4px solid var(--accent);
+            border-radius: 18px;
+            background: linear-gradient(135deg, var(--surface-soft), #fff);
+            color: var(--primary);
+            font-size: 1.08rem;
+            font-style: italic;
+        }
+
+        .about-content {
+            color: var(--muted);
+            line-height: 1.9;
+            font-size: 1.02rem;
+        }
+
+        .mission-vision-container {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+        }
+
+        .mission-card,
+        .vision-card,
+        .service-card,
+        .feature-item,
+        .client-logo,
+        .contact-info-item,
+        .contact-form,
+        .contact-side-panel,
+        .map-container {
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: #fff;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .mission-card,
+        .vision-card {
+            padding: 2rem;
+            background: linear-gradient(135deg, #fff 0%, var(--surface-soft) 100%);
+            transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+        }
+
+        .mission-card h3,
+        .vision-card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+        }
+
+        .mission-card p,
+        .vision-card p { margin: 0; color: var(--muted); line-height: 1.8; }
+
+        .services-section,
+        .clients-section {
+            background:
+                radial-gradient(circle at top left, rgba(212, 165, 116, 0.12), transparent 18%),
+                linear-gradient(135deg, #f3efe8 0%, #f8f4ee 100%);
+        }
+
+        .service-card {
+            position: relative;
+            height: 100%;
+            padding: 2.2rem;
+            overflow: hidden;
+            transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.28s ease;
+        }
+
+        .service-card:hover::before { transform: scaleX(1); }
+
+        .service-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 64px;
+            height: 64px;
+            margin-bottom: 1.4rem;
+            border-radius: 18px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--accent);
+            font-size: 1.7rem;
+        }
+
+        .service-card h4,
+        .feature-item h4 {
+            margin-bottom: 0.95rem;
+            color: var(--primary);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.45rem;
+            font-weight: 700;
+        }
+
+        .service-card p,
+        .feature-item p { color: var(--muted); line-height: 1.75; }
+
+        .service-features { margin: 1.2rem 0 0; padding: 0; list-style: none; }
+
+        .service-features li {
+            position: relative;
+            padding: 0.5rem 0 0.5rem 1.5rem;
+            color: var(--muted);
+        }
+
+        .service-features li::before {
+            content: '\2713';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 800;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-item {
+            min-height: 300px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.28s ease, box-shadow 0.28s ease;
+        }
+
+        .feature-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 72px;
+            height: 72px;
+            margin-bottom: 1.3rem;
+            border-radius: 20px;
+            background: var(--surface-soft);
+            color: var(--accent);
+            font-size: 1.8rem;
+        }
+
+        .clients-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .client-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 190px;
+            padding: 1rem;
+            transition: transform 0.28s ease, box-shadow 0.28s ease;
+        }
+
+        .client-placeholder {
+            width: 100%;
+            text-align: center;
+        }
+
+        .client-dummy-image {
+            width: 100%;
+            height: 118px;
+            object-fit: cover;
+            border-radius: 18px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(45, 95, 79, 0.08);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+        }
+
+        .client-name {
+            color: var(--primary);
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            font-size: 1rem;
+        }
+
+        .gallery-section {
+            padding: 100px 0;
+            background: linear-gradient(180deg, #fff8f1 0%, #ffffff 100%);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.35rem;
+        }
+
+        .gallery-card {
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            background: #fff;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.28s ease, box-shadow 0.28s ease;
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .gallery-card img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-copy {
+            padding: 1.15rem 1.15rem 1.25rem;
+        }
+
+        .gallery-copy h4 {
+            margin: 0 0 0.45rem;
+            color: var(--primary);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+        }
+
+        .gallery-copy p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .cta-section {
+            position: relative;
+            overflow: hidden;
+            padding: 88px 0;
+            text-align: center;
+            color: #fff;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        }
+
+        .cta-section h2 {
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+
+        .cta-section p {
+            max-width: 680px;
+            margin: 0 auto 2rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.85;
+            font-size: 1.05rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .whatsapp-section {
+            padding: 0 0 100px;
+        }
+
+        .whatsapp-card {
+            display: grid;
+            grid-template-columns: 84px 1fr auto;
+            gap: 1.25rem;
+            align-items: center;
+            padding: 2rem;
+            border: 1px solid rgba(37, 211, 102, 0.16);
+            border-radius: 26px;
+            background: linear-gradient(135deg, #ffffff 0%, #f3fcf7 100%);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .whatsapp-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 84px;
+            height: 84px;
+            border-radius: 24px;
+            background: linear-gradient(135deg, #25d366 0%, #128c4a 100%);
+            color: #fff;
+            font-size: 2rem;
+            box-shadow: 0 18px 32px rgba(37, 211, 102, 0.22);
+        }
+
+        .whatsapp-copy h3 {
+            margin: 0 0 0.45rem;
+            color: var(--primary);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.9rem;
+        }
+
+        .whatsapp-copy p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.8;
+        }
+
+        .whatsapp-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 0.55rem;
+            align-items: flex-end;
+        }
+
+        .btn-whatsapp {
+            min-width: 220px;
+            padding: 0.95rem 1.3rem;
+            border: 0;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #25d366 0%, #128c4a 100%);
+            color: #fff;
+            font-weight: 700;
+            box-shadow: 0 16px 30px rgba(37, 211, 102, 0.2);
+            cursor: default;
+        }
+
+        .contact-section { background: linear-gradient(180deg, #fff 0%, #f7f3ec 100%); }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info-item {
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.28s ease, box-shadow 0.28s ease;
+        }
+
+        .contact-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 64px;
+            height: 64px;
+            margin-bottom: 1rem;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #edd2b0;
+            font-size: 1.3rem;
+            box-shadow: 0 14px 28px rgba(45, 95, 79, 0.16);
+        }
+
+        .contact-info-item h4 {
+            margin-bottom: 0.45rem;
+            color: var(--primary);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+        }
+
+        .contact-info-item p,
+        .contact-info-item a { color: var(--muted); text-decoration: none; }
+
+        .contact-info-item a:hover,
+        .footer-column a:hover,
+        .footer-bottom a:hover { color: var(--accent); }
+
+        .contact-form {
+            padding: 2.2rem;
+            background: rgba(255, 255, 255, 0.78);
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group { margin-bottom: 1.15rem; }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.45rem;
+            color: var(--primary);
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .form-control,
+        .form-select {
+            border: 1px solid rgba(45, 95, 79, 0.14);
+            border-radius: 12px;
+            padding: 0.9rem 1rem;
+            background: #fff;
+            color: var(--ink);
+            box-shadow: none;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 0.28rem rgba(212, 165, 116, 0.15);
+        }
+
+        .btn-submit {
+            width: 100%;
+            border: 0;
+            padding: 1rem 1.2rem;
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .contact-side-panel {
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-side-panel h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+        }
+
+        .contact-side-panel p { color: var(--muted); line-height: 1.85; }
+
+        .response-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            margin-top: 0.3rem;
+            margin-bottom: 1.5rem;
+            padding: 0.72rem 0.95rem;
+            border-radius: 999px;
+            background: var(--accent-soft);
+            color: var(--primary);
+            font-size: 0.92rem;
+            font-weight: 700;
+        }
+
+        .social-list,
+        .footer-social {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(45, 95, 79, 0.08);
+            color: var(--primary);
+            text-decoration: none;
+            transition: transform 0.28s ease, background-color 0.28s ease, color 0.28s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--accent);
+            color: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+
+        .map-container { overflow: hidden; }
+
+        .map-container iframe {
+            display: block;
+            width: 100%;
+            height: 400px;
+            border: 0;
+        }
+
+        .form-success {
+            display: none;
+            margin-top: 1rem;
+            padding: 0.9rem 1rem;
+            border-radius: 14px;
+            background: rgba(45, 95, 79, 0.08);
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .form-success.show { display: block; }
+
+        footer {
+            position: relative;
+            overflow: hidden;
+            padding: 54px 0 20px;
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .footer-content,
+        .footer-bottom { position: relative; z-index: 1; }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .footer-column h4 {
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+        }
+
+        .footer-column p,
+        .footer-column li,
+        .footer-bottom { color: rgba(255, 255, 255, 0.8); }
+
+        .footer-column ul { margin: 0; padding: 0; list-style: none; }
+        .footer-column li { margin-bottom: 0.7rem; }
+
+        .footer-column a,
+        .footer-bottom a {
+            color: rgba(255, 255, 255, 0.82);
+            text-decoration: none;
+        }
+
+        .footer-social { margin-top: 1rem; }
+
+        .footer-social .social-icon {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+        }
+
+        .footer-social .social-icon:hover {
+            background: var(--accent);
+            color: var(--primary-dark);
+        }
+
+        .footer-bottom { text-align: center; font-size: 0.92rem; }
+
+        .reveal-target {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal-target.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scroll-top-btn {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border: 0;
+            border-radius: 50%;
+            background: var(--primary);
+            color: #fff;
+            box-shadow: var(--shadow-md);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity 0.28s ease, transform 0.28s ease, visibility 0.28s ease, background-color 0.28s ease;
+            z-index: 99;
+        }
+
+        .scroll-top-btn.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .scroll-top-btn:hover {
+            background: var(--accent);
+            color: var(--primary-dark);
+        }
+
+        @media (max-width: 991px) {
+            .navbar-collapse {
+                margin-top: 1rem;
+                padding: 1rem;
+                border-radius: 18px;
+                background: rgba(255, 255, 255, 0.98);
+                box-shadow: var(--shadow-md);
+            }
+
+            .hero { padding: 90px 0 110px; }
+            .hero-panel { max-width: 100%; margin-top: 2rem; }
+            .contact-info { grid-template-columns: 1fr; }
+            .whatsapp-card {
+                grid-template-columns: 1fr;
+                text-align: left;
+            }
+            .whatsapp-meta {
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .about-section,
+            .services-section,
+            .why-section,
+            .clients-section,
+            .contact-section,
+            .cta-section { padding: 74px 0; }
+
+            .hero-buttons,
+            .cta-buttons,
+            .hero-trust {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn-primary-custom,
+            .btn-secondary-custom { width: 100%; }
+
+            .mission-vision-container { grid-template-columns: 1fr; }
+            .contact-form,
+            .contact-side-panel { padding: 1.5rem; }
+            .hero { padding-bottom: 96px; }
+            .hero h1 { font-size: 2.7rem; }
+            .stats-section { padding-top: 28px; }
+        }
+
+        @media (max-width: 480px) {
+            .container-xl { padding-inline: 16px; }
+            .hero { padding: 78px 0 92px; }
+            .hero h1 { font-size: 2.15rem; }
+            .section-title { font-size: 1.75rem; }
+            .client-logo,
+            .feature-item,
+            .service-card,
+            .contact-info-item { min-height: auto; }
+            .gallery-card img { height: 210px; }
+            .stats-section {
+                padding: 22px 0 70px;
+                }
+            .stat-card {
+                padding: 1.5rem;
+            }
+            .whatsapp-card {
+                padding: 1.4rem;
+            }
+            .whatsapp-icon {
+                width: 68px;
+                height: 68px;
+                border-radius: 20px;
+                font-size: 1.6rem;
+            }
+            .whatsapp-copy h3 {
+                font-size: 1.55rem;
+            }
+            .btn-whatsapp {
+                width: 100%;
+                min-width: 0;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after {
+                animation: none !important;
+                transition-duration: 0.01ms !important;
+            }
+            .reveal-target { opacity: 1; transform: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container-xl">
+            <a class="navbar-brand" href="#home"><i class="fas fa-shield-alt"></i> SIBHA</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#impact">Impact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#clients">Clients</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item ms-lg-2 mt-3 mt-lg-0"><a class="btn btn-nav-primary" href="#contact">Request Consultation</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="container-xl">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-7 hero-content">
+                    <div class="eyebrow-pill">
+                        <i class="fas fa-star"></i>
+                        Safe culture and compliance-first support
+                    </div>
+                    <h1>Safe Workplaces<br>Safe Communities<br>Empowered Lives</h1>
+                    <p class="hero-tagline">Building Compliance with Culture</p>
+                    <p class="hero-description">
+                        SIBHA Foundation partners with organizations and communities to build safe, inclusive, and legally compliant environments through expert-led POSH training, gender sensitization, DEI initiatives, and POCSO awareness programs.
+                    </p>
+                    <div class="hero-buttons">
+                        <button class="btn-primary-custom" onclick="scrollToSection('contact')">Start Today</button>
+                        <button class="btn-secondary-custom" onclick="scrollToSection('about')">Learn More</button>
+                    </div>
+                    <div class="hero-trust">
+                        <span><i class="fas fa-check-circle"></i> Practical training design</span>
+                        <span><i class="fas fa-check-circle"></i> Policy and IC support</span>
+                        <span><i class="fas fa-check-circle"></i> Faster enquiry response</span>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <aside class="hero-panel reveal-target">
+                        <div class="hero-panel-badge">
+                            <i class="fas fa-shield-halved"></i>
+                            Trusted Partner
+                        </div>
+                        <h3>Built to feel more polished, credible, and easy to scan</h3>
+                        <p>
+                            The UI now has stronger visual hierarchy, cleaner cards, better mobile spacing, and more refined interaction states across the full page.
+                        </p>
+                        <ul class="hero-panel-list">
+                            <li><i class="fas fa-layer-group"></i><span>Clearer separation between sections and better content rhythm.</span></li>
+                            <li><i class="fas fa-mobile-screen-button"></i><span>Improved responsiveness for smaller screens and collapsed navigation.</span></li>
+                            <li><i class="fas fa-sparkles"></i><span>Smoother, lighter animations without the previous rough edges.</span></li>
+                        </ul>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-section">
+        <div class="container-xl">
+            <div class="stats-shell">
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="stat-card reveal-target">
+                            <div class="stat-number" data-target="200">200+</div>
+                            <div class="stat-label">Training Sessions Conducted</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stat-card reveal-target">
+                            <div class="stat-number" data-target="30">30+</div>
+                            <div class="stat-label">Organizations Reached</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stat-card reveal-target">
+                            <div class="stat-number" data-target="3500">3500+</div>
+                            <div class="stat-label">Individuals Sensitized</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section" id="about">
+        <div class="container-xl">
+            <div class="row">
+                <div class="col-lg-8">
+                    <p class="section-subtitle">Who We Are</p>
+                    <h2 class="section-title">About SIBHA Foundation</h2>
+                    <p class="about-content section-lead">
+                        SIBHA Foundation (Snehashraya IBHA Foundation) is committed to empowering individuals and organizations by promoting safety, dignity, and inclusion. With a strong focus on Prevention of Sexual Harassment (POSH), we work closely with organizations to build awareness, ensure compliance, and create respectful workplace cultures.
+                    </p>
+                    <p class="about-content">
+                        We also extend our efforts to child protection through POCSO awareness and community-based initiatives. We bring a practical, compliance-driven approach backed by real-world experience in POSH implementation, IC processes, and organizational training.
+                    </p>
+
+                    <div class="about-highlight">
+                        "A trusted partner in workplace safety, compliance, and social impact initiatives."
+                    </div>
+
+                    <div class="mission-vision-container">
+                        <div class="mission-card reveal-target">
+                            <h3><i class="fas fa-bullseye" style="color: var(--accent); margin-right: 0.6rem;"></i>Our Mission</h3>
+                            <p>
+                                ✓ Promote safe workplaces through POSH awareness and compliance<br><br>
+                                ✓ Foster inclusive environments through gender sensitization<br><br>
+                                ✓ Support organizations in ethical and legal practices<br><br>
+                                ✓ Drive awareness on child protection under POCSO
+                            </p>
+                        </div>
+                        <div class="vision-card reveal-target">
+                            <h3><i class="fas fa-eye" style="color: var(--accent); margin-right: 0.6rem;"></i>Our Vision</h3>
+                            <p>
+                                To create a society where every individual experiences safety, dignity, and equal opportunity in all aspects of life and work.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services-section" id="services">
+        <div class="container-xl">
+            <p class="section-subtitle">Our Offerings</p>
+            <h2 class="section-title">Our Services</h2>
+            <p class="section-lead">
+                Our services are designed to support organizations at every stage, from awareness and training to compliance and policy implementation.
+            </p>
+
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card reveal-target">
+                        <div class="service-icon"><i class="fas fa-book-reader"></i></div>
+                        <h4>POSH Awareness &amp; Training</h4>
+                        <p>Educate employees and management on the Prevention of Sexual Harassment at Workplace Act, ensuring a safe, respectful, and legally compliant environment.</p>
+                        <ul class="service-features">
+                            <li>Understanding sexual harassment forms</li>
+                            <li>Legal framework under POSH Act</li>
+                            <li>Redressal mechanism</li>
+                            <li>Case studies and real-life scenarios</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card reveal-target">
+                        <div class="service-icon"><i class="fas fa-network-wired"></i></div>
+                        <h4>Internal Committee (IC) Support</h4>
+                        <p>End-to-end support for Internal Committees to ensure effective handling of complaints in line with legal guidelines.</p>
+                        <ul class="service-features">
+                            <li>Formation of IC as per law</li>
+                            <li>Capacity building for members</li>
+                            <li>Inquiry process and documentation</li>
+                            <li>Report preparation</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card reveal-target">
+                        <div class="service-icon"><i class="fas fa-hands-helping"></i></div>
+                        <h4>Gender Sensitization</h4>
+                        <p>Create awareness about gender biases and promote respectful and inclusive behaviour in workplaces.</p>
+                        <ul class="service-features">
+                            <li>Understanding gender stereotypes</li>
+                            <li>Identifying unconscious bias</li>
+                            <li>Respectful communication</li>
+                            <li>Workplace inclusivity practices</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card reveal-target">
+                        <div class="service-icon"><i class="fas fa-people-arrows"></i></div>
+                        <h4>Diversity, Equity &amp; Inclusion (DEI)</h4>
+                        <p>Build inclusive environments where diversity is respected and every individual feels valued.</p>
+                        <ul class="service-features">
+                            <li>DEI fundamentals</li>
+                            <li>Inclusive leadership</li>
+                            <li>Bias identification and reduction</li>
+                            <li>Equitable workplace practices</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card reveal-target">
+                        <div class="service-icon"><i class="fas fa-scroll"></i></div>
+                        <h4>Policy &amp; Compliance Support</h4>
+                        <p>Assist organizations in developing and implementing policies aligned with legal and ethical standards.</p>
+                        <ul class="service-features">
+                            <li>POSH policy drafting</li>
+                            <li>Review of existing policies</li>
+                            <li>Code of conduct</li>
+                            <li>Compliance review</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card reveal-target">
+                        <div class="service-icon"><i class="fas fa-child"></i></div>
+                        <h4>POCSO Awareness Programs</h4>
+                        <p>Focus on child safety, protection, and legal awareness for institutions and communities.</p>
+                        <ul class="service-features">
+                            <li>Understanding POCSO Act</li>
+                            <li>Identifying signs of abuse</li>
+                            <li>Roles of institutions and caregivers</li>
+                            <li>Reporting mechanisms</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="why-section">
+        <div class="container-xl">
+            <p class="section-subtitle">Why Choose SIBHA</p>
+            <h2 class="section-title">Why Choose Us</h2>
+            <p class="section-lead">
+                We combine compliance knowledge with practical delivery, so organizations receive guidance that is legally grounded, culturally thoughtful, and easy to implement.
+            </p>
+
+            <div class="feature-grid">
+                <div class="feature-item reveal-target">
+                    <div class="feature-icon"><i class="fas fa-award"></i></div>
+                    <h4>Expert Expertise</h4>
+                    <p>Deep expertise in POSH compliance and workplace ethics backed by real-world experience.</p>
+                </div>
+                <div class="feature-item reveal-target">
+                    <div class="feature-icon"><i class="fas fa-lightbulb"></i></div>
+                    <h4>Practical Approach</h4>
+                    <p>Scenario-based training methodology that ensures practical, applicable learning.</p>
+                </div>
+                <div class="feature-item reveal-target">
+                    <div class="feature-icon"><i class="fas fa-cogs"></i></div>
+                    <h4>Customized Solutions</h4>
+                    <p>Programs tailored to align perfectly with your organizational needs and goals.</p>
+                </div>
+                <div class="feature-item reveal-target">
+                    <div class="feature-icon"><i class="fas fa-seedling"></i></div>
+                    <h4>Sustainable Change</h4>
+                    <p>Focus on creating lasting behavioral and cultural transformation within organizations.</p>
+                </div>
+                <div class="feature-item reveal-target">
+                    <div class="feature-icon"><i class="fas fa-handshake"></i></div>
+                    <h4>Trusted Partner</h4>
+                    <p>Built on trust, credibility, and commitment to your organizational success.</p>
+                </div>
+                <div class="feature-item reveal-target">
+                    <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                    <h4>Measurable Results</h4>
+                    <p>Demonstrated impact with clear metrics and outcomes across all programs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="clients-section" id="impact">
+        <div class="container-xl">
+            <p class="section-subtitle">Our Achievement</p>
+            <h2 class="section-title">Our Impact</h2>
+            <p class="section-lead">
+                Our impact reflects our commitment to creating safer workplaces through consistent engagement, expert facilitation, and measurable outcomes.
+            </p>
+
+            <div class="row g-4 mb-1">
+                <div class="col-md-4">
+                    <div class="stat-card reveal-target">
+                        <div class="stat-number" data-target="200">200+</div>
+                        <div class="stat-label">Training Sessions</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-card reveal-target">
+                        <div class="stat-number" data-target="30">30+</div>
+                        <div class="stat-label">Organizations</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-card reveal-target">
+                        <div class="stat-number" data-target="3500">3500+</div>
+                        <div class="stat-label">Individuals Trained</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="clients-section" id="clients">
+        <div class="container-xl">
+            <p class="section-subtitle">Our Partners</p>
+            <h2 class="section-title">Our Clients</h2>
+            <p class="section-lead">
+                We have partnered with organizations across industries to deliver high-quality training and compliance solutions. Our clients value our expertise, practical approach, and commitment to creating safe and inclusive environments.
+            </p>
+
+            <div class="clients-grid">
+                <div class="client-logo reveal-target">
+                    <div class="client-placeholder">
+                        <img class="client-dummy-image" alt="Anaya Wellness logo" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Cdefs%3E%3ClinearGradient id='g1' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23f7efe5'/%3E%3Cstop offset='100%25' stop-color='%23ead5bd'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='320' height='180' rx='26' fill='url(%23g1)'/%3E%3Ccircle cx='76' cy='90' r='34' fill='%232d5f4f' opacity='0.1'/%3E%3Crect x='112' y='56' width='136' height='68' rx='18' fill='%23ffffff' opacity='0.85'/%3E%3Ctext x='180' y='84' text-anchor='middle' font-family='Georgia, serif' font-size='22' fill='%232d5f4f' font-weight='700'%3EAnaya%3C/text%3E%3Ctext x='180' y='108' text-anchor='middle' font-family='Arial, sans-serif' font-size='13' fill='%23b8844b'%3EWellness%3C/text%3E%3Ctext x='76' y='98' text-anchor='middle' font-family='Georgia, serif' font-size='28' fill='%232d5f4f' font-weight='700'%3EA%3C/text%3E%3C/svg%3E">
+                        <div class="client-name">Anaya Wellness</div>
+                    </div>
+                </div>
+                <div class="client-logo reveal-target">
+                    <div class="client-placeholder">
+                        <img class="client-dummy-image" alt="Nayra Studio logo" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Cdefs%3E%3ClinearGradient id='g2' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23f9f5ee'/%3E%3Cstop offset='100%25' stop-color='%23dfe9df'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='320' height='180' rx='26' fill='url(%23g2)'/%3E%3Crect x='40' y='42' width='68' height='96' rx='22' fill='%232d5f4f'/%3E%3Ctext x='74' y='98' text-anchor='middle' font-family='Georgia, serif' font-size='30' fill='%23f2dcc4' font-weight='700'%3EN%3C/text%3E%3Crect x='126' y='54' width='150' height='72' rx='18' fill='%23ffffff' opacity='0.82'/%3E%3Ctext x='201' y='84' text-anchor='middle' font-family='Georgia, serif' font-size='21' fill='%232d5f4f' font-weight='700'%3ENayra%3C/text%3E%3Ctext x='201' y='108' text-anchor='middle' font-family='Arial, sans-serif' font-size='13' fill='%23907a63'%3EBeauty Studio%3C/text%3E%3C/svg%3E">
+                        <div class="client-name">Nayra Studio</div>
+                    </div>
+                </div>
+                <div class="client-logo reveal-target">
+                    <div class="client-placeholder">
+                        <img class="client-dummy-image" alt="Vedika Care logo" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Cdefs%3E%3ClinearGradient id='g3' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23f7efe8'/%3E%3Cstop offset='100%25' stop-color='%23efe4d6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='320' height='180' rx='26' fill='url(%23g3)'/%3E%3Ccircle cx='96' cy='90' r='42' fill='%23ffffff' opacity='0.7'/%3E%3Cpath d='M82 104c10-26 20-39 30-39 10 0 20 13 30 39' fill='none' stroke='%23d4a574' stroke-width='8' stroke-linecap='round'/%3E%3Ctext x='212' y='82' text-anchor='middle' font-family='Georgia, serif' font-size='22' fill='%232d5f4f' font-weight='700'%3EVedika%3C/text%3E%3Ctext x='212' y='107' text-anchor='middle' font-family='Arial, sans-serif' font-size='13' fill='%23a18769'%3ECare Lounge%3C/text%3E%3C/svg%3E">
+                        <div class="client-name">Vedika Care</div>
+                    </div>
+                </div>
+                <div class="client-logo reveal-target">
+                    <div class="client-placeholder">
+                        <img class="client-dummy-image" alt="Meher Beauty logo" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Cdefs%3E%3ClinearGradient id='g4' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23edf2ee'/%3E%3Cstop offset='100%25' stop-color='%23f5eadc'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='320' height='180' rx='26' fill='url(%23g4)'/%3E%3Crect x='42' y='48' width='82' height='82' rx='24' fill='%23ffffff' opacity='0.8'/%3E%3Cpath d='M68 102c14-32 24-48 40-48 10 0 18 8 28 24' fill='none' stroke='%232d5f4f' stroke-width='7' stroke-linecap='round'/%3E%3Ctext x='218' y='82' text-anchor='middle' font-family='Georgia, serif' font-size='21' fill='%232d5f4f' font-weight='700'%3EMeher%3C/text%3E%3Ctext x='218' y='107' text-anchor='middle' font-family='Arial, sans-serif' font-size='13' fill='%23b8844b'%3EBeauty House%3C/text%3E%3C/svg%3E">
+                        <div class="client-name">Meher Beauty</div>
+                    </div>
+                </div>
+                <div class="client-logo reveal-target">
+                    <div class="client-placeholder">
+                        <img class="client-dummy-image" alt="Aarohi Spa logo" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Cdefs%3E%3ClinearGradient id='g5' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23f9f4ed'/%3E%3Cstop offset='100%25' stop-color='%23e9efe7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='320' height='180' rx='26' fill='url(%23g5)'/%3E%3Ccircle cx='76' cy='90' r='36' fill='%23d4a574' opacity='0.28'/%3E%3Ctext x='76' y='99' text-anchor='middle' font-family='Georgia, serif' font-size='28' fill='%232d5f4f' font-weight='700'%3EA%3C/text%3E%3Ctext x='202' y='84' text-anchor='middle' font-family='Georgia, serif' font-size='22' fill='%232d5f4f' font-weight='700'%3EAarohi%3C/text%3E%3Ctext x='202' y='108' text-anchor='middle' font-family='Arial, sans-serif' font-size='13' fill='%239a876f'%3ESpa Rituals%3C/text%3E%3C/svg%3E">
+                        <div class="client-name">Aarohi Spa</div>
+                    </div>
+                </div>
+                <div class="client-logo reveal-target">
+                    <div class="client-placeholder">
+                        <img class="client-dummy-image" alt="Tarini Glow logo" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Cdefs%3E%3ClinearGradient id='g6' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23f6ede4'/%3E%3Cstop offset='100%25' stop-color='%23efe7db'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='320' height='180' rx='26' fill='url(%23g6)'/%3E%3Crect x='46' y='50' width='88' height='80' rx='24' fill='%232d5f4f' opacity='0.1'/%3E%3Ctext x='90' y='99' text-anchor='middle' font-family='Georgia, serif' font-size='28' fill='%232d5f4f' font-weight='700'%3ET%3C/text%3E%3Ctext x='214' y='82' text-anchor='middle' font-family='Georgia, serif' font-size='22' fill='%232d5f4f' font-weight='700'%3ETarini%3C/text%3E%3Ctext x='214' y='108' text-anchor='middle' font-family='Arial, sans-serif' font-size='13' fill='%23af8a62'%3EGlow Studio%3C/text%3E%3C/svg%3E">
+                        <div class="client-name">Tarini Glow</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery-section" id="gallery">
+        <div class="container-xl">
+            <p class="section-subtitle">Beauty Moments</p>
+            <h2 class="section-title">Our Gallery</h2>
+            <p class="section-lead">
+                A curated look at Indian beauty parlour experiences, from bridal styling and mehendi sessions to skin care, hair artistry, and festive makeovers.
+            </p>
+
+            <div class="gallery-grid">
+                <article class="gallery-card reveal-target">
+                    <img alt="Indian bridal makeup illustration" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 480 360'%3E%3Cdefs%3E%3ClinearGradient id='g1' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23f5e4d5'/%3E%3Cstop offset='100%25' stop-color='%23fff6ed'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='480' height='360' fill='url(%23g1)'/%3E%3Ccircle cx='240' cy='136' r='58' fill='%23f4c8a5'/%3E%3Cpath d='M170 298c24-66 70-100 130-100s106 34 130 100' fill='%23b45d59'/%3E%3Cpath d='M182 106c22-54 94-80 126-20 12 22 10 44 10 44h-144s-4-8 8-24z' fill='%232d5f4f'/%3E%3Ccircle cx='220' cy='138' r='4' fill='%23231f20'/%3E%3Ccircle cx='262' cy='138' r='4' fill='%23231f20'/%3E%3Cpath d='M224 164c10 8 22 8 32 0' stroke='%23a64747' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='208' cy='118' r='5' fill='%23d4a574'/%3E%3Ccircle cx='274' cy='118' r='5' fill='%23d4a574'/%3E%3Cpath d='M240 84l8 18h-16z' fill='%23d4a574'/%3E%3C/svg%3E">
+                    <div class="gallery-copy">
+                        <h4>Bridal Makeup</h4>
+                        <p>Elegant bridal looks inspired by classic Indian wedding styling and soft festive glamour.</p>
+                    </div>
+                </article>
+
+                <article class="gallery-card reveal-target">
+                    <img alt="Mehendi design illustration" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 480 360'%3E%3Cdefs%3E%3ClinearGradient id='g2' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23fff3ea'/%3E%3Cstop offset='100%25' stop-color='%23f2eadf'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='480' height='360' fill='url(%23g2)'/%3E%3Crect x='90' y='86' width='122' height='188' rx='58' fill='%23e6b18a'/%3E%3Crect x='268' y='86' width='122' height='188' rx='58' fill='%23e2aa82'/%3E%3Cpath d='M152 130c16 18 16 50 0 68M328 130c16 18 16 50 0 68' stroke='%23835b3a' stroke-width='8' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='150' cy='166' r='26' fill='none' stroke='%23835b3a' stroke-width='6'/%3E%3Ccircle cx='330' cy='166' r='26' fill='none' stroke='%23835b3a' stroke-width='6'/%3E%3Cpath d='M138 220c18-16 44-16 62 0M318 220c18-16 44-16 62 0' stroke='%23835b3a' stroke-width='6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+                    <div class="gallery-copy">
+                        <h4>Mehendi Art</h4>
+                        <p>Intricate mehendi-inspired visuals that reflect celebration, tradition, and festive beauty rituals.</p>
+                    </div>
+                </article>
+
+                <article class="gallery-card reveal-target">
+                    <img alt="Hair styling illustration" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 480 360'%3E%3Cdefs%3E%3ClinearGradient id='g3' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23edf3ef'/%3E%3Cstop offset='100%25' stop-color='%23fbf3ea'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='480' height='360' fill='url(%23g3)'/%3E%3Ccircle cx='230' cy='138' r='52' fill='%23f3c6a3'/%3E%3Cpath d='M154 120c20-66 132-86 166 0 8 22 8 58 8 58H148s-2-34 6-58z' fill='%232d5f4f'/%3E%3Cpath d='M198 186c0 54 14 92 42 92s42-38 42-92' stroke='%232d5f4f' stroke-width='20' fill='none' stroke-linecap='round'/%3E%3Crect x='316' y='120' width='66' height='16' rx='8' fill='%23d4a574'/%3E%3Crect x='340' y='88' width='18' height='72' rx='8' fill='%23d4a574'/%3E%3C/svg%3E">
+                    <div class="gallery-copy">
+                        <h4>Hair Styling</h4>
+                        <p>Polished salon finishes for party looks, festive styling, and graceful everyday transformations.</p>
+                    </div>
+                </article>
+
+                <article class="gallery-card reveal-target">
+                    <img alt="Facial and skin care illustration" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 480 360'%3E%3Cdefs%3E%3ClinearGradient id='g4' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23fff6ef'/%3E%3Cstop offset='100%25' stop-color='%23eef6f1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='480' height='360' fill='url(%23g4)'/%3E%3Crect x='78' y='208' width='324' height='76' rx='28' fill='%23ffffff' opacity='0.8'/%3E%3Ccircle cx='240' cy='142' r='60' fill='%23f4c9ab'/%3E%3Cpath d='M178 118c24-48 108-48 124 0' stroke='%232d5f4f' stroke-width='18' fill='none' stroke-linecap='round'/%3E%3Cpath d='M218 154c14 10 30 10 44 0' stroke='%23a05d59' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='218' cy='140' r='4' fill='%23231f20'/%3E%3Ccircle cx='262' cy='140' r='4' fill='%23231f20'/%3E%3Ccircle cx='156' cy='116' r='14' fill='%23d4a574' opacity='0.55'/%3E%3Ccircle cx='324' cy='102' r='10' fill='%23d4a574' opacity='0.45'/%3E%3Ccircle cx='334' cy='134' r='18' fill='%23d4a574' opacity='0.3'/%3E%3C/svg%3E">
+                    <div class="gallery-copy">
+                        <h4>Skin Care Rituals</h4>
+                        <p>Glow-focused facial care, nourishing treatments, and relaxing parlour sessions for radiant skin.</p>
+                    </div>
+                </article>
+
+                <article class="gallery-card reveal-target">
+                    <img alt="Traditional makeover illustration" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 480 360'%3E%3Cdefs%3E%3ClinearGradient id='g5' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23f7e7dd'/%3E%3Cstop offset='100%25' stop-color='%23fff9f2'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='480' height='360' fill='url(%23g5)'/%3E%3Ccircle cx='240' cy='118' r='48' fill='%23f3c39f'/%3E%3Cpath d='M160 294c22-78 58-112 80-112s58 34 80 112' fill='%23a23f53'/%3E%3Cpath d='M190 108c18-48 88-52 106 0' stroke='%232d5f4f' stroke-width='18' fill='none' stroke-linecap='round'/%3E%3Cpath d='M238 70l8 18h-16z' fill='%23d4a574'/%3E%3Ccircle cx='214' cy='118' r='4' fill='%23231f20'/%3E%3Ccircle cx='262' cy='118' r='4' fill='%23231f20'/%3E%3Cpath d='M220 144c14 10 26 10 40 0' stroke='%23a64747' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3Crect x='112' y='224' width='48' height='76' rx='18' fill='%23d4a574' opacity='0.5'/%3E%3Crect x='320' y='224' width='48' height='76' rx='18' fill='%23d4a574' opacity='0.5'/%3E%3C/svg%3E">
+                    <div class="gallery-copy">
+                        <h4>Festive Makeovers</h4>
+                        <p>Traditional and modern Indian looks designed for family events, celebrations, and special occasions.</p>
+                    </div>
+                </article>
+
+                <article class="gallery-card reveal-target">
+                    <img alt="Nail and beauty station illustration" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 480 360'%3E%3Cdefs%3E%3ClinearGradient id='g6' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23fdf3ea'/%3E%3Cstop offset='100%25' stop-color='%23eef5ef'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='480' height='360' fill='url(%23g6)'/%3E%3Crect x='86' y='206' width='308' height='82' rx='26' fill='%23ffffff' opacity='0.82'/%3E%3Crect x='132' y='92' width='44' height='114' rx='16' fill='%23d4a574'/%3E%3Crect x='194' y='76' width='44' height='130' rx='16' fill='%232d5f4f'/%3E%3Crect x='256' y='102' width='44' height='104' rx='16' fill='%23bf6b6a'/%3E%3Crect x='318' y='122' width='44' height='84' rx='16' fill='%23d4a574' opacity='0.8'/%3E%3Ccircle cx='154' cy='90' r='12' fill='%23ffffff' opacity='0.8'/%3E%3Ccircle cx='216' cy='74' r='12' fill='%23ffffff' opacity='0.8'/%3E%3Ccircle cx='278' cy='100' r='12' fill='%23ffffff' opacity='0.8'/%3E%3C/svg%3E">
+                    <div class="gallery-copy">
+                        <h4>Beauty Station</h4>
+                        <p>A premium parlour setup for nail colour, makeup accents, and pampering detail work.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container-xl cta-inner">
+            <h2>Create a Safer Workplace Today</h2>
+            <p>Partner with SIBHA Foundation for customized training and compliance solutions tailored to your organization's needs.</p>
+            <div class="cta-buttons">
+                <button class="btn-primary-custom" onclick="scrollToSection('contact')">Request a Consultation</button>
+                <button class="btn-secondary-custom" onclick="scrollToSection('services')">Explore Services</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="whatsapp-section">
+        <div class="container-xl">
+            <div class="whatsapp-card reveal-target">
+                <div class="whatsapp-icon">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <div class="whatsapp-copy">
+                    <h3>Chat on WhatsApp</h3>
+                    <p>
+                        A WhatsApp contact area is now ready on the page. Once you share the phone number, I can turn this into a working click-to-chat button instantly.
+                    </p>
+                </div>
+                <div class="whatsapp-meta">
+                    <button type="button" class="btn-whatsapp" aria-label="WhatsApp chat placeholder">
+                        WhatsApp Chat Coming Soon
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+        <div class="container-xl">
+            <p class="section-subtitle">Get in Touch</p>
+            <h2 class="section-title">Contact Us</h2>
+            <p class="section-lead">
+                Get in touch with us for customized training programs, compliance support, and consultation. We respond promptly to help you take the next step towards a safer workplace.
+            </p>
+
+            <div class="contact-info">
+                <div class="contact-info-item reveal-target">
+                    <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                    <h4>Email</h4>
+                    <p><a href="mailto:hello@sibha.org">hello@sibha.org</a></p>
+                </div>
+                <div class="contact-info-item reveal-target">
+                    <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                    <h4>Phone</h4>
+                    <p><a href="tel:+919876543210">+91 98765 43210</a></p>
+                </div>
+                <div class="contact-info-item reveal-target">
+                    <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <h4>Location</h4>
+                    <p>New Delhi, India</p>
+                </div>
+            </div>
+
+            <div class="row g-4 align-items-stretch">
+                <div class="col-lg-6">
+                    <div class="contact-form reveal-target">
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Your Name <span style="color: var(--accent);">*</span></label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter your full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="organization">Organization</label>
+                                <input type="text" class="form-control" id="organization" name="organization" placeholder="Your organization name">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address <span style="color: var(--accent);">*</span></label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="your@email.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" class="form-control" id="phone" name="phone" placeholder="+91 XXXXX XXXXX">
+                            </div>
+                            <div class="form-group">
+                                <label for="service">Type of Service Needed <span style="color: var(--accent);">*</span></label>
+                                <select class="form-select" id="service" name="service" required>
+                                    <option value="">Select a service...</option>
+                                    <option value="posh">POSH Awareness &amp; Training</option>
+                                    <option value="ic">Internal Committee Support</option>
+                                    <option value="gender">Gender Sensitization</option>
+                                    <option value="dei">DEI Initiatives</option>
+                                    <option value="policy">Policy &amp; Compliance Support</option>
+                                    <option value="pocso">POCSO Awareness</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message <span style="color: var(--accent);">*</span></label>
+                                <textarea class="form-control" id="message" name="message" rows="5" placeholder="Tell us about your needs..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn-submit"><i class="fas fa-paper-plane" style="margin-right: 0.5rem;"></i>Send Message</button>
+                            <div class="form-success" id="formSuccess">Thank you for your inquiry. We will contact you soon.</div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 d-flex flex-column gap-4">
+                    <div class="contact-side-panel reveal-target">
+                        <h3>Let's Work Together</h3>
+                        <p>
+                            We're committed to helping organizations create safe, inclusive, and compliant environments. Whether you're just starting your POSH journey or looking to enhance your existing programs, our team is ready to support you.
+                        </p>
+                        <div class="response-badge">
+                            <i class="fas fa-bolt"></i>
+                            Response time: typically within 24 business hours
+                        </div>
+                        <div class="social-list">
+                            <a href="#" class="social-icon" title="LinkedIn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-icon" title="Twitter" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-icon" title="Facebook" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-icon" title="Instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="map-container reveal-target">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.8922476154226!2d77.20721572346928!3d28.613939875685867!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce2cc4ccccccd%3A0x1234567890abcdef!2sNew%20Delhi%2C%20Delhi!5e0!3m2!1sen!2sin!4v1234567890123"
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="SIBHA Foundation location map"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container-xl">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4>SIBHA Foundation</h4>
+                    <p>Building safe, inclusive, and respectful environments across workplaces and communities.</p>
+                    <div class="footer-social">
+                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon" title="LinkedIn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-icon" title="Twitter" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-icon" title="Facebook" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-icon" title="Instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#impact">Impact</a></li>
+                        <li><a href="#clients">Clients</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="#services">POSH Training</a></li>
+                        <li><a href="#services">IC Support</a></li>
+                        <li><a href="#services">Gender Sensitization</a></li>
+                        <li><a href="#services">DEI Initiatives</a></li>
+                        <li><a href="#services">Policy Support</a></li>
+                        <li><a href="#services">POCSO Awareness</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope" style="color: var(--accent); margin-right: 0.45rem;"></i><a href="mailto:hello@sibha.org">hello@sibha.org</a></li>
+                        <li><i class="fas fa-phone" style="color: var(--accent); margin-right: 0.45rem;"></i><a href="tel:+919876543210">+91 98765 43210</a></li>
+                        <li><i class="fas fa-map-marker-alt" style="color: var(--accent); margin-right: 0.45rem;"></i>New Delhi, India</li>
+                        <li><i class="fas fa-clock" style="color: var(--accent); margin-right: 0.45rem;"></i>Mon-Fri: 9:00 AM - 6:00 PM IST</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 SIBHA Foundation. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.14,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        document.querySelectorAll('.reveal-target').forEach((element) => {
+            revealObserver.observe(element);
+        });
+
+        const statObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+
+                const numberElement = entry.target.querySelector('.stat-number');
+                if (numberElement && !numberElement.dataset.animated) {
+                    animateCounter(numberElement, Number(numberElement.dataset.target || 0));
+                    numberElement.dataset.animated = 'true';
+                }
+
+                statObserver.unobserve(entry.target);
+            });
+        }, { threshold: 0.55 });
+
+        document.querySelectorAll('.stat-card').forEach((card) => {
+            statObserver.observe(card);
+        });
+
+        function animateCounter(element, target, duration = 1600) {
+            let startTime = null;
+
+            function step(timestamp) {
+                if (!startTime) startTime = timestamp;
+                const progress = Math.min((timestamp - startTime) / duration, 1);
+                const value = Math.floor(progress * target);
+                element.textContent = value + '+';
+
+                if (progress < 1) {
+                    requestAnimationFrame(step);
+                } else {
+                    element.textContent = target + '+';
+                }
+            }
+
+            requestAnimationFrame(step);
+        }
+
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section[id]');
+
+        window.addEventListener('scroll', () => {
+            const scrollY = window.pageYOffset;
+
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop - 180;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+
+                if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                    navLinks.forEach((link) => {
+                        link.classList.toggle('active', link.getAttribute('href') === '#' + sectionId);
+                    });
+                }
+            });
+        });
+
+        const contactForm = document.getElementById('contactForm');
+        const formSuccess = document.getElementById('formSuccess');
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const submitBtn = this.querySelector('.btn-submit');
+            const originalHtml = submitBtn.innerHTML;
+
+            submitBtn.innerHTML = '<i class="fas fa-check" style="margin-right: 0.5rem;"></i>Message Sent!';
+            submitBtn.style.background = 'var(--accent)';
+            submitBtn.style.color = 'var(--primary-dark)';
+            formSuccess.classList.add('show');
+
+            setTimeout(() => {
+                contactForm.reset();
+                submitBtn.innerHTML = originalHtml;
+                submitBtn.style.background = '';
+                submitBtn.style.color = '';
+                formSuccess.classList.remove('show');
+            }, 2200);
+        });
+
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+        window.addEventListener('scroll', () => {
+            scrollTopBtn.classList.toggle('show', window.pageYOffset > 360);
+        });
+
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
